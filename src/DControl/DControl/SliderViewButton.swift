@@ -1,46 +1,64 @@
 //
 //  SlideViewButton.swift
 //  DControl
-//
+//  基本的にnibで使用する
 //  Created by DIO on 2019/06/23.
 //  Copyright © 2019 DIO. All rights reserved.
 //
 
 import UIKit
 
-public protocol DSleepSliderViewButtonDelegate: class {
+@objc public protocol DSleepSliderViewButtonDelegate: class {
     // 右端でドラッグが終了したことを通知する。
     func didRightEndDragEnd(sliderViewButton:UIView);
 }
 
 @IBDesignable
-public class SliderViewButton: UIView {
+public class DSleepSliderViewButton: UIView {
     
-    let SliderViewButtonNibName:String = "SliderViewButton"
+    let DSleepSliderViewButtonNibName:String = "DSleepSliderViewButton"
 
     // 背景色
-    public var bgColor:UIColor? = UIColor.cyan
+    @IBInspectable public var bgColor:UIColor?  {
+        set {
+            backgroundColor = newValue
+        }
+        get {
+            return backgroundColor
+        }
+    }
     // スライダーの背景色
-    public var bgSliderViewColor:UIColor? = UIColor.red
+    @IBInspectable public var bgSliderViewColor:UIColor? {
+        set {
+            sliderView.backgroundColor = newValue;
+        }
+        get {
+            if sliderView != nil {
+                return sliderView.backgroundColor
+            }
+            
+            return nil
+        }
+    }
     // ドラッグできるView
     @IBOutlet weak var sliderView: UIView!
-    
     // Viewの中央に表示するラベル
     @IBOutlet weak var message: UILabel!
     
+    @IBInspectable public var messageText:String? {
+        didSet {
+            if self.message == nil {
+                return;
+            }
+            
+            self.message.text = messageText
+        }
+    }
     
     // 角丸
     public var cornerRadius:CGFloat = 10.0
     // デリゲート
-    public weak var delegate:DSleepSliderViewButtonDelegate?
-    
-    
-    /// ボタンメッセージのセッター
-    ///
-    /// - Parameter messageText: 設定するボタンのメッセージ
-    public func setMessageText(messageText:String?) {
-        message.text = messageText;
-    }
+    @IBOutlet public weak var delegate:DSleepSliderViewButtonDelegate?
     
     
     // コードから初期化はここから
@@ -59,7 +77,7 @@ public class SliderViewButton: UIView {
     private func comminInit() {
         // MyCustomView.xib からカスタムViewをロードする
         let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: SliderViewButtonNibName, bundle: bundle)
+        let nib = UINib(nibName: DSleepSliderViewButtonNibName, bundle: bundle)
         let view:UIView = nib.instantiate(withOwner: self, options: nil).first as! UIView
         addSubview(view)
         view.backgroundColor = UIColor.clear

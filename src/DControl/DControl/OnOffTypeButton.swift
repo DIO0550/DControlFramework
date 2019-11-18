@@ -1,6 +1,6 @@
 //
 //  OnOffTypeButton.swift
-//  DSleepingControlFramework
+//  DControl
 //  MacOSのTypeOnOff風のボタン
 //  Created by DIO on 2019/10/27.
 //  Copyright © 2019 DIO. All rights reserved.
@@ -29,7 +29,7 @@ public class OnOffTypeButton: UIButton {
     // 枠線の太さ
     @IBInspectable var borderWidth:CGFloat = 1.0
     // ボタンのステータス
-    @IBInspectable private(set) var buttonState:Bool = false {
+    @IBInspectable public private(set) var buttonState:Bool = false {
         willSet {
             if newValue {
                 self.backgroundColor = self.onStateBgColor

@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:DControlSample/DControlSample.xcodeproj">
+      location = "group:DControl/DControlSample/DControlSample.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:DControl/DControl.xcodeproj">

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3AAF17B3238C2418009CBB8F /* DSegumentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF17B2238C2418009CBB8F /* DSegumentedControl.swift */; };
 		3AFEDABF236DDEAB00704650 /* DControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFEDABD236DDEAB00704650 /* DControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AFEDAC7236DDF9B00704650 /* SliderViewButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFEDAC6236DDF9B00704650 /* SliderViewButton.xib */; };
 		3AFEDACA236DDFA700704650 /* SliderViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFEDAC8236DDFA700704650 /* SliderViewButton.swift */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3AAF17B2238C2418009CBB8F /* DSegumentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSegumentedControl.swift; sourceTree = "<group>"; };
 		3AFEDABA236DDEAB00704650 /* DControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AFEDABD236DDEAB00704650 /* DControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DControl.h; sourceTree = "<group>"; };
 		3AFEDABE236DDEAB00704650 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 				3AFEDABD236DDEAB00704650 /* DControl.h */,
 				3AFEDAC9236DDFA700704650 /* OnOffTypeButton.swift */,
 				3AFEDAC8236DDFA700704650 /* SliderViewButton.swift */,
+				3AAF17B2238C2418009CBB8F /* DSegumentedControl.swift */,
 				3AFEDABE236DDEAB00704650 /* Info.plist */,
 			);
 			path = DControl;
@@ -150,6 +153,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AAF17B3238C2418009CBB8F /* DSegumentedControl.swift in Sources */,
 				3AFEDACB236DDFA700704650 /* OnOffTypeButton.swift in Sources */,
 				3AFEDACA236DDFA700704650 /* SliderViewButton.swift in Sources */,
 			);
@@ -209,7 +213,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -266,7 +270,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -290,6 +294,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = DControl/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -298,6 +303,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = DIO.DControl;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -316,6 +322,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = DControl/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -324,6 +331,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = DIO.DControl;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -24,10 +24,10 @@ fileprivate enum SegmentedPosition: Int {
 @IBDesignable
 public class DSegumentedControl: UIView {
     
-    @IBOutlet weak var delegate: DSegumentedControlDelegate? = nil
+    @IBOutlet public weak var delegate: DSegumentedControlDelegate? = nil
     
     /// segmentの数
-    @IBInspectable var numberOfSegment: Int {
+    @IBInspectable public var numberOfSegment: Int {
         get {
             return self.innerViews.count
         }
@@ -45,7 +45,7 @@ public class DSegumentedControl: UIView {
     }
     
     /// 選択中のindex
-    @IBInspectable var selectedSegmentIndex: Int {
+    @IBInspectable public var selectedSegmentIndex: Int {
         get {
             if self.innerViews.count == 0 { return -1 }
             var selectIndex = -1

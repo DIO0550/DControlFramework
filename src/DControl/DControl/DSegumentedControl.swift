@@ -78,7 +78,12 @@ public class DSegumentedControl: UIView {
             self.segmentDirection = SegmentedDirection(rawValue: newValue) ?? .Horizontal
         }
     }
-
+    
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.backgroundColor = .clear
+    }
+    
     /// 内部ビューの色
     @IBInspectable var innerBgColor: UIColor? = nil
     @IBInspectable var innerTextColor: UIColor? = nil
@@ -100,7 +105,6 @@ public class DSegumentedControl: UIView {
         innerView.removeFromSuperview()
         self.innerViews.remove(at: segment)
         self.readjustmentInnerFrame()
-        self.cornerRadiusInnerView()
         self.setNeedsDisplayInnerViews()
     }
     
@@ -123,7 +127,6 @@ public class DSegumentedControl: UIView {
         self.addSubview(innerView)
         
         self.readjustmentInnerFrame()
-        self.cornerRadiusInnerView()
         self.setNeedsDisplayInnerViews()
     }
     
@@ -148,7 +151,6 @@ public class DSegumentedControl: UIView {
         self.addSubview(innerView)
         
         self.readjustmentInnerFrame()
-        self.cornerRadiusInnerView()
         self.setNeedsDisplayInnerViews()
     }
     
@@ -177,22 +179,6 @@ public class DSegumentedControl: UIView {
             let rect = self.segmentRect(at: index)
             subview.frame = rect
         }
-    }
-    
-    private func cornerRadiusInnerView() {
-        if self.innerViews.count == 0 { return }
-        
-        for innerView in self.innerViews {
-            innerView.layer.cornerRadius = 0.0
-        }
-        
-        let firstInnerView = self.innerViews.first!
-        firstInnerView.layer.cornerRadius = DSegumentedControlCornerRadius
-        firstInnerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMinXMinYCorner]
-        
-        let lastInnerView = self.innerViews.last!
-        lastInnerView.layer.cornerRadius = DSegumentedControlCornerRadius
-        lastInnerView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
     }
     
     private func setNeedsDisplayInnerViews() {
@@ -250,6 +236,8 @@ fileprivate class DSegumentedControlInnerView: UIView {
     init(with image: UIImage?, frame: CGRect) {
         super.init(frame: frame)
         self.image = image
+        // clearにしないと、背景が黒くなる
+        self.backgroundColor = .clear
     }
     /**
      initializer
@@ -259,6 +247,8 @@ fileprivate class DSegumentedControlInnerView: UIView {
     init(with title: String?, frame: CGRect) {
         super.init(frame: frame)
         self.title = title
+        // clearにしないと、背景が黒くなる
+        self.backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {
@@ -266,19 +256,43 @@ fileprivate class DSegumentedControlInnerView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        var fillColor: UIColor = self.dataSource?.dsegmentedControlInnerViewBgColor(dsegmentedControlInnerView: self) ?? UIColor.white
-        if self.isSelected {
-            fillColor = self.dataSource?.dsegmentedControlInnerViewSelectBgColor(dsegmentedControlInnerView: self) ?? UIColor.systemBlue
-        }
-        fillColor.setFill()
-        UIRectFill(rect)
+        self.drawBackground(rect)
         self.drawBorder(rect)
         self.drawImage(rect)
         self.drawTitle(rect)
+    }
+    
+    private func drawBackground(_ rect: CGRect) {
+        let context: CGContext? = UIGraphicsGetCurrentContext()
+        context?.saveGState()
+        var byRoundingCorners: UIRectCorner = []
+        let position = self.dataSource?.dsegmentedControlInnerViewPosition(dsegmentedControlInnerView: self) ?? .other
         
+        switch position {
+        case .First:
+            byRoundingCorners = [.topLeft, .bottomLeft]
+        case .Last:
+            byRoundingCorners = [.topRight, .bottomRight]
+        case .FirstAndLast:
+            byRoundingCorners = [.allCorners]
+        case .other:
+            break
+        }
+        
+        let bezierPath = UIBezierPath.init(roundedRect: rect, byRoundingCorners: byRoundingCorners, cornerRadii: CGSize(width: DSegumentedControlCornerRadius, height: DSegumentedControlCornerRadius))
+        
+        var bgColor = self.dataSource?.dsegmentedControlInnerViewBgColor(dsegmentedControlInnerView: self) ?? UIColor.black
+        if self.isSelected {
+            bgColor = self.dataSource?.dsegmentedControlInnerViewSelectBgColor(dsegmentedControlInnerView: self) ?? UIColor.black
+        }
+        bgColor.setFill()
+        bezierPath.fill()
+        context?.restoreGState()
     }
     
     private func drawBorder(_ rect: CGRect) {
+        let context: CGContext? = UIGraphicsGetCurrentContext()
+        context?.saveGState()
         var byRoundingCorners: UIRectCorner = []
         let position = self.dataSource?.dsegmentedControlInnerViewPosition(dsegmentedControlInnerView: self) ?? .other
         
@@ -301,6 +315,7 @@ fileprivate class DSegumentedControlInnerView: UIView {
         }
         borderColor.setStroke()
         bezierPath.stroke()
+        context?.restoreGState()
     }
     
     private func drawTitle(_ rect: CGRect) {
@@ -308,6 +323,8 @@ fileprivate class DSegumentedControlInnerView: UIView {
             return
         }
         
+        let context: CGContext? = UIGraphicsGetCurrentContext()
+        context?.saveGState()
         let drawText = self.title! as NSString
         let titleLength: Int = self.title!.count
         let length: Int = self.dataSource?.dsegmentedControlInnerViewMaxLength(dsegmentedControlInnerView: self) ?? titleLength
@@ -315,9 +332,9 @@ fileprivate class DSegumentedControlInnerView: UIView {
         
         let fontSize: CGFloat = (length == 0) ? rect.size.width : rect.size.width / CGFloat(length)
         
-        var textColor = UIColor.black
+        var textColor = self.dataSource?.dsegmentedControlInnerViewTextColor(dsegmentedControlInnerView: self) ?? UIColor.systemBlue
         if self.isSelected {
-            textColor = self.dataSource?.dsegmentedControlInnerViewSelectTextColor(dsegmentedControlInnerView: self) ?? UIColor.systemBlue
+            textColor = self.dataSource?.dsegmentedControlInnerViewSelectTextColor(dsegmentedControlInnerView: self) ?? UIColor.white
         }
         // フォント属性
         let fontAttr = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize),
@@ -329,6 +346,7 @@ fileprivate class DSegumentedControlInnerView: UIView {
         let y_pos = (rect.size.height - size.height) / 2
         // テキスト描画
         drawText.draw(at: CGPoint(x: rect.origin.x + x_pos, y: rect.origin.y + y_pos), withAttributes: fontAttr)
+        context?.restoreGState()
     }
     
     private func drawImage(_ rect: CGRect) {

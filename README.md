@@ -2,10 +2,10 @@
 iOS用カスタムコントロールフレームワーク
 
 
-## OnOffTypeButton.swift
+## DOnOffTypeButton.swift
 MacOSのType-onoff風のボタン
 
-## SliderViewButton
+## DSliderViewButton
 右側までビューをスライドするボタン
 
 ## DSegumentedControl

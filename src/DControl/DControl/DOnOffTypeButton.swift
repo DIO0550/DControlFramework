@@ -1,5 +1,5 @@
 //
-//  OnOffTypeButton.swift
+//  DOnOffTypeButton.swift
 //  DControl
 //  MacOSのTypeOnOff風のボタン
 //  Created by DIO on 2019/10/27.
@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-public class OnOffTypeButton: UIButton {
+public class DOnOffTypeButton: UIButton {
     
     // ONの場合の背景色
     @IBInspectable var onStateBgColor:UIColor = UIColor.systemBlue

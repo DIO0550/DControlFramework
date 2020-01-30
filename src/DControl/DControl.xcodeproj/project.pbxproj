@@ -7,21 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A6DBC0E23E06DCC0015BECB /* DSliderViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DBC0D23E06DCC0015BECB /* DSliderViewButton.swift */; };
 		3AAF17B3238C2418009CBB8F /* DSegumentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF17B2238C2418009CBB8F /* DSegumentedControl.swift */; };
 		3AFEDABF236DDEAB00704650 /* DControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AFEDABD236DDEAB00704650 /* DControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AFEDAC7236DDF9B00704650 /* SliderViewButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFEDAC6236DDF9B00704650 /* SliderViewButton.xib */; };
-		3AFEDACA236DDFA700704650 /* SliderViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFEDAC8236DDFA700704650 /* SliderViewButton.swift */; };
-		3AFEDACB236DDFA700704650 /* OnOffTypeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFEDAC9236DDFA700704650 /* OnOffTypeButton.swift */; };
+		3AFEDACB236DDFA700704650 /* DOnOffTypeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFEDAC9236DDFA700704650 /* DOnOffTypeButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A6DBC0D23E06DCC0015BECB /* DSliderViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSliderViewButton.swift; sourceTree = "<group>"; };
 		3AAF17B2238C2418009CBB8F /* DSegumentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSegumentedControl.swift; sourceTree = "<group>"; };
 		3AFEDABA236DDEAB00704650 /* DControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AFEDABD236DDEAB00704650 /* DControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DControl.h; sourceTree = "<group>"; };
 		3AFEDABE236DDEAB00704650 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3AFEDAC6236DDF9B00704650 /* SliderViewButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderViewButton.xib; sourceTree = "<group>"; };
-		3AFEDAC8236DDFA700704650 /* SliderViewButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderViewButton.swift; sourceTree = "<group>"; };
-		3AFEDAC9236DDFA700704650 /* OnOffTypeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnOffTypeButton.swift; sourceTree = "<group>"; };
+		3AFEDAC9236DDFA700704650 /* DOnOffTypeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DOnOffTypeButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,22 +52,13 @@
 		3AFEDABC236DDEAB00704650 /* DControl */ = {
 			isa = PBXGroup;
 			children = (
-				3AFEDAC5236DDF1B00704650 /* nib */,
 				3AFEDABD236DDEAB00704650 /* DControl.h */,
-				3AFEDAC9236DDFA700704650 /* OnOffTypeButton.swift */,
-				3AFEDAC8236DDFA700704650 /* SliderViewButton.swift */,
+				3AFEDAC9236DDFA700704650 /* DOnOffTypeButton.swift */,
+				3A6DBC0D23E06DCC0015BECB /* DSliderViewButton.swift */,
 				3AAF17B2238C2418009CBB8F /* DSegumentedControl.swift */,
 				3AFEDABE236DDEAB00704650 /* Info.plist */,
 			);
 			path = DControl;
-			sourceTree = "<group>";
-		};
-		3AFEDAC5236DDF1B00704650 /* nib */ = {
-			isa = PBXGroup;
-			children = (
-				3AFEDAC6236DDF9B00704650 /* SliderViewButton.xib */,
-			);
-			path = nib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,7 +131,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AFEDAC7236DDF9B00704650 /* SliderViewButton.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,9 +141,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A6DBC0E23E06DCC0015BECB /* DSliderViewButton.swift in Sources */,
 				3AAF17B3238C2418009CBB8F /* DSegumentedControl.swift in Sources */,
-				3AFEDACB236DDFA700704650 /* OnOffTypeButton.swift in Sources */,
-				3AFEDACA236DDFA700704650 /* SliderViewButton.swift in Sources */,
+				3AFEDACB236DDFA700704650 /* DOnOffTypeButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

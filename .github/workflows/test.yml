@@ -1,0 +1,25 @@
+
+name: build
+
+on:
+  push:
+    branches:
+      - master
+        
+  pull_request:
+    types: [opened, synchronize]
+  
+
+jobs:
+  test:
+
+    runs-on: macOS-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+       ref: ${{ github.event.pull_request.head.sha }}
+    - name: xcode-select 
+      run: sudo xcode-select --switch /Applications/Xcode_11.3.app
+    - name: test
+      run: xcodebuild -workspace src/DControl.xcworkspace -scheme DControl -configuration Test test

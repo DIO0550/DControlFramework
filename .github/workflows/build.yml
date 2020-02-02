@@ -21,4 +21,4 @@ jobs:
     - name: xcode-select 
       run: sudo xcode-select --switch /Applications/Xcode_11.3.app
     - name: build
-      run: xcodebuild -workspace src/DControl.xcworkspace -scheme DControl -configuration BuildTest build
+      run: xcodebuild -workspace src/DControl.xcworkspace -scheme DControl -sdk iphonesimulator -configuration BuildTest build

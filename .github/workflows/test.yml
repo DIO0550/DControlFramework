@@ -22,4 +22,4 @@ jobs:
     - name: xcode-select 
       run: sudo xcode-select --switch /Applications/Xcode_11.3.app
     - name: test
-      run: xcodebuild -workspace src/DControl.xcworkspace -scheme DControl -configuration Test test
+      run: xcodebuild -workspace src/DControl.xcworkspace -scheme DControl -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11 Pro Max' -configuration Test test

@@ -14,7 +14,7 @@ fileprivate enum SegmentedPosition: Int {
     case First
     case Last
     case FirstAndLast
-    case other
+    case Other
 }
 
 @objc public protocol DSegumentedControlDelegate: class {
@@ -266,7 +266,7 @@ fileprivate class DSegumentedControlInnerView: UIView {
         let context: CGContext? = UIGraphicsGetCurrentContext()
         context?.saveGState()
         var byRoundingCorners: UIRectCorner = []
-        let position = self.dataSource?.dsegmentedControlInnerViewPosition(dsegmentedControlInnerView: self) ?? .other
+        let position = self.dataSource?.dsegmentedControlInnerViewPosition(dsegmentedControlInnerView: self) ?? .Other
         
         switch position {
         case .First:
@@ -275,7 +275,7 @@ fileprivate class DSegumentedControlInnerView: UIView {
             byRoundingCorners = [.topRight, .bottomRight]
         case .FirstAndLast:
             byRoundingCorners = [.allCorners]
-        case .other:
+        case .Other:
             break
         }
         
@@ -294,7 +294,7 @@ fileprivate class DSegumentedControlInnerView: UIView {
         let context: CGContext? = UIGraphicsGetCurrentContext()
         context?.saveGState()
         var byRoundingCorners: UIRectCorner = []
-        let position = self.dataSource?.dsegmentedControlInnerViewPosition(dsegmentedControlInnerView: self) ?? .other
+        let position = self.dataSource?.dsegmentedControlInnerViewPosition(dsegmentedControlInnerView: self) ?? .Other
         
         switch position {
         case .First:
@@ -303,7 +303,7 @@ fileprivate class DSegumentedControlInnerView: UIView {
             byRoundingCorners = [.topRight, .bottomRight]
         case .FirstAndLast:
             byRoundingCorners = [.allCorners]
-        case .other:
+        case .Other:
             break
         }
         
@@ -393,7 +393,7 @@ extension DSegumentedControl: DSegumentedControlInnerViewDataSource {
         } else if isLast {
             return .Last
         } else {
-            return .other
+            return .Other
         }
     }
     

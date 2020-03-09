@@ -12,6 +12,9 @@ import DControl
 class ViewController: UIViewController {
     @IBOutlet weak var segmentedControl: DSegumentedControl!
     
+    @IBAction func toucheUpButton(_ sender: Any) {
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         

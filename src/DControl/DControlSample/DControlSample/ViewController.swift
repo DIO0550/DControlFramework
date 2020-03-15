@@ -21,10 +21,15 @@ class ViewController: UIViewController {
         self.segmentedControl.insertSegment(withTitle: "First", at: 0, animated: true)
         self.segmentedControl.insertSegment(withTitle: "Second", at: 1, animated: true)
         self.segmentedControl.insertSegment(withTitle: "Third", at: 2, animated: true)
+        
+        self.segmentedControl.selectedSegmentIndex = 0
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    @IBAction func selectSegment(_ sender: Any) {
+        
     }
 }
 

@@ -1,12 +1,26 @@
-# DControlFramework
-iOS用カスタムコントロールフレームワーク
+## DControlFramework is a custom control framework for iOS
 
 
 ## DOnOffTypeButton.swift
-MacOSのType-onoff風のボタン
+MacOS Type-onoff button
+
+### Usage
+```
+TODO
+```
 
 ## DSliderViewButton
-右側までビューをスライドするボタン
+iPhone unlock slider-like control
+
+### Usage
+```
+TODO
+```
 
 ## DSegumentedControl
-iOS12以前のSegumentedControlの見た目の
+iOS12 and earlier looks like a UISegumentedControl
+
+### Usage
+```
+TODO
+```

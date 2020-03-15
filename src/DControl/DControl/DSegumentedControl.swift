@@ -17,14 +17,8 @@ fileprivate enum SegmentedPosition: Int {
     case Other
 }
 
-@objc public protocol DSegumentedControlDelegate: class {
-    func didChangeSelectSegmented(index: Int, title: String?);
-}
-
 @IBDesignable
-public class DSegumentedControl: UIView {
-    
-    @IBOutlet public weak var delegate: DSegumentedControlDelegate? = nil
+public class DSegumentedControl: UIControl {
     
     /// segmentの数
     @IBInspectable public var numberOfSegment: Int {
@@ -121,7 +115,6 @@ public class DSegumentedControl: UIView {
         
         let frame = self.segmentRect(at: segment)
         let innerView = DSegumentedControlInnerView.init(with: image, frame: frame)
-        innerView.delegate = self
         innerView.dataSource = self
         self.innerViews.insert(innerView, at: segment)
         self.addSubview(innerView)
@@ -145,7 +138,6 @@ public class DSegumentedControl: UIView {
         let frame = self.segmentRect(at: segment)
         
         let innerView = DSegumentedControlInnerView.init(with: title, frame: frame)
-        innerView.delegate = self
         innerView.dataSource = self
         self.innerViews.insert(innerView, at: segment)
         self.addSubview(innerView)
@@ -186,10 +178,33 @@ public class DSegumentedControl: UIView {
             innerView.setNeedsDisplay()
         }
     }
-}
-
-fileprivate protocol DSegumentedControlInnerViewDelegate: class {
-    func didSelectDSegumentedControlInnerView(dsegumentedControlInnerView :DSegumentedControlInnerView)
+    
+    override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for subView in self.subviews {
+            guard let touch = event?.touches(for: subView)?.first else { continue }
+            let point = touch.location(in: subView)
+            if type(of: subView) != DSegumentedControlInnerView.self {
+                continue
+            }
+            
+            let innerView = subView as! DSegumentedControlInnerView
+            if !innerView.bounds.contains(point) {
+                continue
+            }
+            self.deselectAll()
+            innerView.isSelected = true
+            self.setNeedsDisplayInnerViews()
+            self.sendActions(for: .touchUpInside)
+            break
+        }
+    }
+    
+    fileprivate func deselectAll() {
+        for innerView in self.innerViews {
+            innerView.isSelected = false
+        }
+    }
+    
 }
 
 fileprivate protocol DSegumentedControlInnerViewDataSource: class {
@@ -218,8 +233,7 @@ fileprivate class DSegumentedControlInnerView: UIView {
             self.setNeedsDisplay()
         }
     }
-    
-    weak var delegate: DSegumentedControlInnerViewDelegate? = nil
+
     weak var dataSource: DSegumentedControlInnerViewDataSource? = nil
     
     // 内部ビュー
@@ -352,10 +366,6 @@ fileprivate class DSegumentedControlInnerView: UIView {
     private func drawImage(_ rect: CGRect) {
         // TODO: draw image
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.delegate?.didSelectDSegumentedControlInnerView(dsegumentedControlInnerView: self)
-    }
 }
 
 extension DSegumentedControl: DSegumentedControlInnerViewDataSource {
@@ -413,26 +423,4 @@ extension DSegumentedControl: DSegumentedControlInnerViewDataSource {
     }
 }
 
-extension DSegumentedControl: DSegumentedControlInnerViewDelegate {
-    fileprivate func didSelectDSegumentedControlInnerView(dsegumentedControlInnerView: DSegumentedControlInnerView) {
-        self.deselectAll()
-        for innerView in self.innerViews {
-            if innerView != dsegumentedControlInnerView {
-                continue
-            }
-            innerView.isSelected = true
-            break
-        }
-        self.setNeedsDisplayInnerViews()
-        let title = dsegumentedControlInnerView.title
-        self.delegate?.didChangeSelectSegmented(index: self.selectedSegmentIndex, title: title)
-    }
-    
-    fileprivate func deselectAll() {
-        for innerView in self.innerViews {
-            innerView.isSelected = false
-        }
-    }
-    
-}
 
